@@ -73,6 +73,7 @@ public class Mundo
 			}
 		}
 		tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.JUGADOR);
+		System.out.println(filaJugador + "," +  columnaJugador);
 	} 
 
 
