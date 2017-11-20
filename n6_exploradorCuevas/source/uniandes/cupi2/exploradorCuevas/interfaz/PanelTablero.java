@@ -65,9 +65,7 @@ public class PanelTablero extends JPanel{
 		return casillas;
 	}
 	
-	public void finJuego(){
-		casillas[principal.darFilaJugador()][principal.darColumnaJugador()].setIcon(new ImageIcon("data/imagenes/jugador_quemado.png"));
-	}
+	
 	
 
 

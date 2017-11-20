@@ -128,7 +128,7 @@ public class Mundo
 	public void mover( int i, int j) throws Exception
 	{
 
-		if (cantidadMaxMovimientos == 0)
+		if (cantidadMaxMovimientos == 1)
 			throw new Exception("Se terminaron los moviemtos");
 
 		if (tablero[i][j].darEstado()==(Casilla.BOMBA))
