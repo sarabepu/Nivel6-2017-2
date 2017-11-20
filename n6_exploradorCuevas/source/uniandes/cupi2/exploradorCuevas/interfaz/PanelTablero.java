@@ -1,4 +1,4 @@
-package uniandes.cupi2.exploradorCuevas.interfaz;
+	package uniandes.cupi2.exploradorCuevas.interfaz;
 
 
 import java.awt.*; 

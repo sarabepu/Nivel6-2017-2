@@ -16,7 +16,7 @@ public class PanelImagen extends JPanel {
 	public PanelImagen()
 	{
 		lblImagen = new JLabel();
-		ImageIcon icono = new ImageIcon( "data/imagenes/Encabezado.png" );
+		ImageIcon icono = new ImageIcon( "data/imagenes/banner.png" );
 		lblImagen.setIcon(icono);
 		add(lblImagen);
 	}

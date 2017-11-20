@@ -15,23 +15,22 @@ public class InterfazJuego extends JFrame {
   private PanelInformacion panelInformacion;
   private Mundo mundo;
   private File tablero;
-  private int tipo;
+
 
 
   public InterfazJuego(){
     setSize(new Dimension(913, 694));
     setLayout (new BorderLayout());
-
+    setResizable(true);
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
     panelImagen =new PanelImagen();
     add(panelImagen, BorderLayout.NORTH);
-
-    panelOpciones =new PanelOpciones(this);
-    add(panelOpciones, BorderLayout.WEST);
+//
+//    panelOpciones =new PanelOpciones(this);
+//    add(panelOpciones, BorderLayout.SOUTH);
 
     panelTablero = new PanelTablero(this);
-    System.out.println("lo inicializa");
     add(panelTablero, BorderLayout.CENTER);
 
     panelInformacion = new PanelInformacion(this);
@@ -39,29 +38,7 @@ public class InterfazJuego extends JFrame {
 
 
   }
-  
-  public void tipo(File pFile)
-  {
-    if (pFile.getName().equals("desafio1.properties"))
-      tipo = 1;
-    else if (pFile.getName().equals("desafio2.properties"))
-      tipo = 2;
-    else if (pFile.getName().equals("desafio3.properties"))
-      tipo = 3;
-  }
-  
-  public void tamnho(int tipo)
-  {
-    if (tipo == 2)
-    setSize(new Dimension(1061, 713));
-    
-    else if (tipo == 3)
-    setSize(new Dimension(865, 688));  
-    
-    else
-    setSize(new Dimension(913, 694));
-      
-  }
+
 
   public void pedirTablero(){  
 
@@ -71,8 +48,6 @@ public class InterfazJuego extends JFrame {
     if( resultado == JFileChooser.APPROVE_OPTION )
     {
       tablero = fc.getSelectedFile( );
-      tipo(tablero);
-      tamnho(tipo);
       try{
         mundo=new Mundo(tablero);
         
@@ -83,7 +58,7 @@ public class InterfazJuego extends JFrame {
       }
       catch (Exception e){
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Formato inv�lido", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Formato invalido", "Error", JOptionPane.ERROR_MESSAGE);
       }
     }
   }
@@ -92,29 +67,15 @@ public class InterfazJuego extends JFrame {
   public String darRutaImagenes(int estado){
     String rpta = "";
     if (estado==Casilla.OBSTACULO)
-      rpta= "data/imagenes/muro.png";
+      rpta= "data/imagenes/obstaculo.png";
     else if (estado==Casilla.VACIA)
       rpta= "data/imagenes/casilla_vacia.png";
-    else if (estado==Casilla.LLAVE_AMARILLA)
-      rpta = "data/imagenes/llave_amarilla.png";
-    else if (estado==Casilla.LLAVE_AZUL)
-      rpta= "data/imagenes/llave_azul.png";
-    else if (estado==Casilla.LLAVE_ROJA)
-      rpta= "data/imagenes/llave_roja.png";
-    else if (estado==Casilla.PUERTA_AMARILLA)
-      rpta= "data/imagenes/puerta_amarilla.png";
-    else if (estado==Casilla.PUERTA_AZUL)
-      rpta= "data/imagenes/puerta_azul.png";
-    else if (estado==Casilla.PUERTA_ROJA)
-      rpta = "data/imagenes/puerta_roja.png";
-    else if (estado==Casilla.CHIP)
-      rpta= "data/imagenes/chip.png";
-    else if (estado==Casilla.SALIDA)
-      rpta= "data/imagenes/puerta_salida.png";
-    else if (estado==Casilla.PREMIO)
-      rpta = "data/imagenes/trofeo.png";
+    else if (estado==Casilla.TESORO)
+      rpta = "data/imagenes/tesoro.gif";
     else if (estado==Casilla.JUGADOR)
-      rpta = "data/imagenes/jugador.png";
+      rpta = "data/imagenes/jugador.gif";
+    else if(estado== Casilla.ILUMINADA)
+    rpta = "data/imagenes/casilla_iluminada.png";
     return rpta;
   }
 
@@ -157,27 +118,14 @@ catch(Exception e)
     return mundo.darColumnas();
   }
 
-  public int darChips()
+  public int darMovs()
   {
-	  return mundo.darChips();
+	  return (Integer) null;
   }
-  public int darAmarillas()
+  public String darTotal()
   {
-	  return mundo.darAmarillas();
+	  return null;
   }
-  public int darAzules()
-  {
-	  return mundo.darAzules();
-  }
-  public int darRojas()
-  {
-	  return mundo.darRojas();
-  }
-  public int darMaxVisitas()
-  {
-	  return mundo.darMaxVisitas();
-  }
-
 
   public int darEstado(int i, int j)
   {
@@ -212,18 +160,6 @@ catch(Exception e)
     }
   }
   
-  public void columnaMasVisita()
-  {
-	   String respuesta = mundo.ColumnaMasVisitada();
-	   JOptionPane.showMessageDialog( this, respuesta, "Respuesta", JOptionPane.INFORMATION_MESSAGE );  
-  }
-  
-  public void filaMasVisita()
-  {
-	   String respuesta = mundo.FilaMasVisitada();
-	   JOptionPane.showMessageDialog( this, respuesta, "Respuesta", JOptionPane.INFORMATION_MESSAGE );  
-  }
-  
   
   
   public void Req1( )
@@ -254,6 +190,18 @@ catch(Exception e)
 		panelTablero.finJuego();
 
 	}
+
+
+public String darBombaFila() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+public String darBombaColumna() {
+	// TODO Auto-generated method stub
+	return null;
+}
   
 
  
