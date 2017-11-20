@@ -49,7 +49,6 @@ public class PanelControles extends JPanel implements ActionListener {
 		arribaD = new JButton ();
 		arribaD.setIcon(new ImageIcon("data/imagenes/direccion-0.png"));
 		arribaD.setEnabled(false);
-		arribaD.setPreferredSize(new Dimension(51, 51));
 		arribaD.addActionListener(this);
 		arribaD.setActionCommand(ARRIBADER);
 
@@ -58,14 +57,12 @@ public class PanelControles extends JPanel implements ActionListener {
 		arriba = new JButton ();
 		arriba.setIcon(new ImageIcon("data/imagenes/direccion-1.png"));
 		arriba.setEnabled(false);
-		arriba.setPreferredSize(new Dimension(51, 51));
 		arriba.addActionListener(this);
 		arriba.setActionCommand(ARRIBA);
 
 		arribaI = new JButton ();
 		arribaI.setIcon(new ImageIcon("data/imagenes/direccion-2.png"));
-		arribaI.setEnabled(false);
-		arribaI.setPreferredSize(new Dimension(51, 51));
+		arribaI.setEnabled(false);	
 		arribaI.addActionListener(this);
 		arribaI.setActionCommand(ARRIBAIZ);
 
@@ -74,7 +71,6 @@ public class PanelControles extends JPanel implements ActionListener {
 		izquierda = new JButton ();
 		izquierda.setIcon(new ImageIcon("data/imagenes/direccion-3.png"));
 		izquierda.setEnabled(false);
-		izquierda.setPreferredSize(new Dimension(51, 51));
 		izquierda.addActionListener(this);
 		izquierda.setActionCommand(IZQUIERDA);
 
@@ -83,7 +79,6 @@ public class PanelControles extends JPanel implements ActionListener {
 		derecha = new JButton ();
 		derecha.setIcon(new ImageIcon("data/imagenes/direccion-5.png"));
 		derecha.setEnabled(false);
-		derecha.setPreferredSize(new Dimension(51, 51));
 		derecha.addActionListener(this);
 		derecha.setActionCommand(DERECHA);
 
@@ -91,14 +86,12 @@ public class PanelControles extends JPanel implements ActionListener {
 		abajoD = new JButton ();
 		abajoD.setIcon(new ImageIcon("data/imagenes/direccion-6.png"));
 		abajoD.setEnabled(false);
-		abajoD.setPreferredSize(new Dimension(51, 51));
 		abajoD.addActionListener(this);
 		abajoD.setActionCommand(ABAJODER);
 		
 		abajo = new JButton ();
 		abajo.setIcon(new ImageIcon("data/imagenes/direccion-7.png"));
 		abajo.setEnabled(false);
-		abajo.setPreferredSize(new Dimension(51, 51));
 		abajo.addActionListener(this);
 		abajo.setActionCommand(ABAJO);
 
@@ -106,7 +99,6 @@ public class PanelControles extends JPanel implements ActionListener {
 		abajoI = new JButton ();
 		abajoI.setIcon(new ImageIcon("data/imagenes/direccion-8.png"));
 		abajoI.setEnabled(false);
-		abajoI.setPreferredSize(new Dimension(51, 51));
 		abajoI.addActionListener(this);
 		abajoI.setActionCommand(ABAJOIZ);
 		

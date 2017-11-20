@@ -46,10 +46,10 @@ public class Mundo
 	}
 
 	public  void inicializarTablero(Properties datos){
-		
+
 		String numMovimientos = datos.getProperty("explorador.movimientos");
 		cantidadMaxMovimientos = Integer.parseInt(numMovimientos);
-		
+
 		String numeroFilas = datos.getProperty("explorador.filas");
 		filas = Integer.parseInt(numeroFilas);  
 
@@ -68,11 +68,12 @@ public class Mundo
 					filaJugador = i;
 					columnaJugador = j;
 				}
-						
+
 				tablero[i][j]= new Casilla (estado, i, j );
 			}
 		}
 		tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.JUGADOR);
+		System.out.println(filaJugador + "," + columnaJugador);
 	} 
 
 
@@ -127,7 +128,7 @@ public class Mundo
 		}
 		if (tablero[i][j].darEstado()==(Casilla.OBSTACULO))
 			throw new Exception("No se puede mover a un obstaculo");
-		
+
 		if (tablero[i][j].darEstado()==(Casilla.TESORO) && cantidadMaxMovimientos > 0)
 		{
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
@@ -135,7 +136,7 @@ public class Mundo
 			columnaJugador = j;
 			cantidadMaxMovimientos--;
 		}
-			
+
 
 	}
 
@@ -151,9 +152,9 @@ public class Mundo
 		String izquierda="";
 		String derecha= "";
 		String abajo= "";
-		
+
 		return null;
-		
+
 	}
 
 
