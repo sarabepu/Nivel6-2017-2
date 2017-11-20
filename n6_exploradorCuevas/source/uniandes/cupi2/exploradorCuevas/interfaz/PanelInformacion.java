@@ -52,6 +52,7 @@ public class PanelInformacion  extends JPanel implements ActionListener{
 	
 	public void actualizar()
 	{
+		mov.setText(""+ principal.darMovs());
 		bombas.actualizar();
 	}
 	public void actionPerformed(ActionEvent arg0) {

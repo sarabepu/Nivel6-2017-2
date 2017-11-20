@@ -92,18 +92,24 @@ try
 }
 catch(Exception e)
 {
+	panelTablero.actualizarMapa();
+	panelInformacion.actualizar();
 	if(e.getMessage().equals("Haz pisado una bomba"))
 	{
+	
 	finJuego("¡Pisaste una boma! Tu juego ha terminado");	
 	}
-	else if(e.getMessage().equals("No ha recogido todos los chips"))
+	else if(e.getMessage().equals("Se terminaron los moviemtos"))
 	{
-		JOptionPane.showMessageDialog( this, e.getMessage(), "Mover", JOptionPane.ERROR_MESSAGE);
+		finJuego("¡te haz quedado sin movimientos! Tu juego ha terminado");
 	}
-	else if(e.getMessage().equals("Â¡Felicitaciones! Gano el juego"))
+	
+	else if(e.getMessage().equals("Haz ganado"))
 	{
-		finJuego(e.getMessage());
+		finJuego("¡Felicidades! Ganaste el juego");
 	}
+	
+	
 }
 
 
