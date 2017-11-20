@@ -122,7 +122,7 @@ catch(Exception e)
 
   public int darMovs()
   {
-	  return mundo.darMaxVisitas();
+	  return mundo.darMaxMovs();
   }
   public String darTotal()
   {

@@ -48,7 +48,6 @@ public class PanelTablero extends JPanel{
 					ImageIcon icono = new ImageIcon( principal.darRutaImagenes(estado));
 					actual.setIcon(icono);
 					casillas[i][j] = actual;
-					actual.setPreferredSize(new Dimension( 51, 52));
 					add(actual);
 				
 				

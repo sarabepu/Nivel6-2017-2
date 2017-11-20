@@ -20,7 +20,7 @@ public class Mundo
 	private int filaJugador;
 	private int columnaJugador;
 	private int cantidadMaxMovimientos;
-	private int cantidadVisitas;
+	private int cantidaVisitas;
 	private Properties datos;
 
 
@@ -40,7 +40,7 @@ public class Mundo
 			in.close( );
 		}
 		catch( Exception e ) {
-			throw new Exception( "Formato inv�lido" );
+			throw new Exception( "Formato invalido" );
 		}
 		return pDatos;
 	}
@@ -108,9 +108,9 @@ public class Mundo
 	{
 		return columnaJugador;
 	}
-	public int darMaxVisitas()
+	public int darMaxMovs()
 	{
-		return cantidadVisitas;
+		return cantidadMaxMovimientos;
 	}
 
 	public void mover( int i, int j) throws Exception
