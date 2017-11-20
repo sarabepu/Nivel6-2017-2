@@ -46,11 +46,11 @@ public class Mundo
 	}
 
 	public  void inicializarTablero(Properties datos){
-		
+
 		numeroBombas = 0;
 		String numMovimientos = datos.getProperty("explorador.movimientos");
 		cantidadMaxMovimientos = Integer.parseInt(numMovimientos);
-		
+
 		String numeroFilas = datos.getProperty("explorador.filas");
 		filas = Integer.parseInt(numeroFilas);  
 
@@ -71,11 +71,13 @@ public class Mundo
 				}
 				else if (estado == 'B')
 					numeroBombas++;
-						
+
 				tablero[i][j]= new Casilla (estado, i, j );
 			}
 		}
 		tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.JUGADOR);
+		volverCercanas(filaJugador, columnaJugador, true);
+		bombasCasillas();
 	} 
 
 
@@ -87,7 +89,10 @@ public class Mundo
 		return rpta;
 	}
 
-
+	public Casilla darCasillas(int i, int j)
+	{
+		return tablero[i][j];
+	}
 
 
 	public int darFilas(){
@@ -123,30 +128,34 @@ public class Mundo
 
 	public void mover( int i, int j) throws Exception
 	{
+		
 		if (cantidadMaxMovimientos == 0)
 			throw new Exception("Se terminaron los moviemtos");
-		
+
 		if (tablero[i][j].darEstado()==(Casilla.BOMBA))
 		{
+			volverCercanas(filaJugador, columnaJugador, false);
 			tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.NADA);
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
 			filaJugador = i;
 			columnaJugador = j;
 			cantidadMaxMovimientos--;
+			volverCercanas(filaJugador, columnaJugador, true);
 			throw new Exception("Haz pisado una bomba");
 		}
-		
 
 		if (tablero[i][j].darEstado()==(Casilla.NADA))
 		{
+			volverCercanas(filaJugador, columnaJugador, false);
 			tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.NADA);
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
 			filaJugador = i;
 			columnaJugador = j;
+			volverCercanas(filaJugador, columnaJugador, true);
 			cantidadMaxMovimientos--;
 
 		}
-		
+
 		if (tablero[i][j].darEstado()==(Casilla.TESORO) )
 		{
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
@@ -155,39 +164,12 @@ public class Mundo
 			cantidadMaxMovimientos--;
 			throw new Exception("Haz ganado");
 		}
-		
-		
+
+
 
 	}
-	
-	
-	
-	public ArrayList<Casilla> obtenerVecinos(int i, int j)
-	{
-		ArrayList<Casilla> respuesta = new ArrayList<Casilla>();
-		if (estaEnElTablero(i-1, j-1))
-			respuesta.add(tablero[i-1][j-1]);
-		if (estaEnElTablero(i-1, j))
-			respuesta.add(tablero[i-1][j]);
-		if (estaEnElTablero(i-1, j-1))
-			respuesta.add(tablero[i-1][j-1]);
-		if (estaEnElTablero(i-1, j+1))
-			respuesta.add(tablero[i-1][j+1]);
-		if (estaEnElTablero(i, j-1))
-			respuesta.add(tablero[i][j-1]);
-		if (estaEnElTablero(i, j+1))
-			respuesta.add(tablero[i][j+1]);
-		if (estaEnElTablero(i+1, j-1))
-			respuesta.add(tablero[i+1][j-1]);
-		if (estaEnElTablero(i+1, j))
-			respuesta.add(tablero[i+1][j]);
-		if (estaEnElTablero(i+1, j+1))
-			respuesta.add(tablero[i+1][j+1]);
-		
-		return respuesta;
-	}
-	
-	
+
+
 	public int numeroBombasCercanas(int i, int j)
 	{
 		int respuesta = 0;
@@ -199,7 +181,9 @@ public class Mundo
 			respuesta++;
 		if (estaEnElTablero(i, j-1) && tablero[i][j-1].darEstado() == Casilla.BOMBA)
 			respuesta++;
-		if (estaEnElTablero(i, j+1) && tablero[i][j+11].darEstado() == Casilla.BOMBA)
+		if (estaEnElTablero(i, j) && tablero[i][j].darEstado() == Casilla.BOMBA)
+			respuesta++;
+		if (estaEnElTablero(i, j+1) && tablero[i][j+1].darEstado() == Casilla.BOMBA)
 			respuesta++;
 		if (estaEnElTablero(i+1, j-1) && tablero[i+1][j-1].darEstado() == Casilla.BOMBA)
 			respuesta++;
@@ -211,26 +195,20 @@ public class Mundo
 	}
 	
 	
-	
-	
-
-	public String darVecinos()
+	public void bombasCasillas()
 	{
-
-		String arribaIzquierda= "";
-		String arribaDerecha= "";
-		String abajoIzquierda= "";
-		String abajoDerecha= "";
-		String arriba= "";
-		String izquierda="";
-		String derecha= "";
-		String abajo= "";
-		
-		return null;
-		
+		int numero = 0;
+		for (int i = 0; i < filas; i++)
+		{
+			for (int j = 0; j < columnas; j++) 
+			{
+				numero = numeroBombasCercanas(i, j);
+				darCasillas(i, j).cambiarBombasCerca(numero);
+			}
+		}
 	}
-
-
+	
+	
 
 	public boolean estaEnElTablero(int i, int j)
 	{
@@ -243,6 +221,43 @@ public class Mundo
 			return true;
 		}
 	}
+	
+	public boolean esNadaOBomba(int i, int j)
+	{
+		return (darCasillas(i, j).darEstado() == Casilla.BOMBA || darCasillas(i, j).darEstado() == Casilla.NADA);
+	}
+	
+	
+
+	public void volverCercanas(int i, int j, boolean aCercana)
+	{
+		if (estaEnElTablero(i-1, j-1) && esNadaOBomba(i-1, j-1) )
+			darCasillas(i-1, j-1).cambiarEsCercana(aCercana);
+		
+		if (estaEnElTablero(i-1, j) && esNadaOBomba(i-1, j))
+			darCasillas(i-1, j).cambiarEsCercana(aCercana);
+		
+		if (estaEnElTablero(i-1, j+1) && esNadaOBomba(i-1, j+1))
+			darCasillas(i-1, j+1).cambiarEsCercana(aCercana);
+		
+		if (estaEnElTablero(i, j-1) && esNadaOBomba(i, j-1))
+			darCasillas(i, j-1).cambiarEsCercana(aCercana);
+		
+		if (estaEnElTablero(i, j+1) && esNadaOBomba(i, j+1))
+			darCasillas(i, j+1).cambiarEsCercana(aCercana);
+		
+		if (estaEnElTablero(i+1, j-1) && esNadaOBomba(i+1, j-1))
+			darCasillas(i+1, j-1).cambiarEsCercana(aCercana);
+		
+		if (estaEnElTablero(i+1, j) && esNadaOBomba(i+1, j))
+			darCasillas(i+1, j).cambiarEsCercana(aCercana);
+		
+		if (estaEnElTablero(i+1, j+1) && esNadaOBomba(i+1, j+1))
+			darCasillas(i+1, j+1).cambiarEsCercana(aCercana);
+	}
+	
+
+
 	public String Req1( )
 	{
 		return "Respuesta 1";

@@ -12,11 +12,15 @@ public class Casilla {
 	private int estado;
 	private int columna;
 	private int fila;
+	private boolean esCercana;
+	private int bombasCerca;
 
 	public Casilla (int pEstado, int pFila, int pColumna){
 		estado = pEstado;
 		columna = pColumna;
 		fila = pFila;
+		esCercana = false;
+		bombasCerca = 0;
 	}
 	public int darEstado()
 	{
@@ -30,6 +34,26 @@ public class Casilla {
 	}
 	public void cambiarEstado(int pEstado){
 		estado=pEstado;
+	}
+	
+	public boolean esCercana()
+	{
+		return esCercana;
+	}
+	
+	public void cambiarEsCercana(boolean cercana)
+	{
+		esCercana = cercana;
+	}
+	
+	public int darBombasCerca()
+	{
+		return bombasCerca;
+	}
+	
+	public void cambiarBombasCerca(int pBombasCerca)
+	{
+		bombasCerca = pBombasCerca;
 	}
 	
 }

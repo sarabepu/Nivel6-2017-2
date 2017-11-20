@@ -50,7 +50,7 @@ public class PanelControles extends JPanel implements ActionListener {
 		arribaD.setIcon(new ImageIcon("data/imagenes/direccion-0.png"));
 		arribaD.setEnabled(false);
 		arribaD.addActionListener(this);
-		arribaD.setActionCommand(ARRIBADER);
+		arribaD.setActionCommand(ARRIBAIZ);
 
 
 
@@ -64,7 +64,7 @@ public class PanelControles extends JPanel implements ActionListener {
 		arribaI.setIcon(new ImageIcon("data/imagenes/direccion-2.png"));
 		arribaI.setEnabled(false);	
 		arribaI.addActionListener(this);
-		arribaI.setActionCommand(ARRIBAIZ);
+		arribaI.setActionCommand(ARRIBADER);
 
 		
 
@@ -87,7 +87,7 @@ public class PanelControles extends JPanel implements ActionListener {
 		abajoD.setIcon(new ImageIcon("data/imagenes/direccion-6.png"));
 		abajoD.setEnabled(false);
 		abajoD.addActionListener(this);
-		abajoD.setActionCommand(ABAJODER);
+		abajoD.setActionCommand(ABAJOIZ);
 		
 		abajo = new JButton ();
 		abajo.setIcon(new ImageIcon("data/imagenes/direccion-7.png"));
@@ -100,7 +100,7 @@ public class PanelControles extends JPanel implements ActionListener {
 		abajoI.setIcon(new ImageIcon("data/imagenes/direccion-8.png"));
 		abajoI.setEnabled(false);
 		abajoI.addActionListener(this);
-		abajoI.setActionCommand(ABAJOIZ);
+		abajoI.setActionCommand(ABAJODER);
 		
 		 add(new JLabel(""));
 		 add(new JLabel(""));
@@ -177,9 +177,40 @@ public class PanelControles extends JPanel implements ActionListener {
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
-			
+				}	
 		}
+		else if (comando.equals(ARRIBADER)){
+			try {
+				principal.mover(principal.darFilaJugador()-1, principal.darColumnaJugador()+1);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+	}
+		else if (comando.equals(ARRIBAIZ)){
+			try {
+				principal.mover(principal.darFilaJugador()-1, principal.darColumnaJugador()-1);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+	}
+		else if (comando.equals(ABAJOIZ)){
+			try {
+				principal.mover(principal.darFilaJugador()+1, principal.darColumnaJugador()-1);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+	}
+		else if (comando.equals(ABAJODER)){
+			try {
+				principal.mover(principal.darFilaJugador()+1, principal.darColumnaJugador()+1);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+	}
 		
 
 	}

@@ -44,8 +44,15 @@ public class PanelTablero extends JPanel{
 			for( int j =0; j<casillas[0].length; j++){
 				
 					JLabel actual = new JLabel();
-					int estado = principal.darEstado(i,j);
-					ImageIcon icono = new ImageIcon( principal.darRutaImagenes(estado));
+					Casilla c = principal.darCasilla(i, j);
+					ImageIcon icono = new ImageIcon( principal.darRutaImagenes(c));
+					if(c.esCercana())
+					{
+						System.out.println("llego aca: "+c.darBombasCerca());
+						actual.setForeground(Color.CYAN);
+						actual.setHorizontalTextPosition(JLabel.CENTER);
+						actual.setText(c.darBombasCerca()+"");
+					}
 					actual.setIcon(icono);
 					casillas[i][j] = actual;
 					add(actual);
@@ -64,10 +71,17 @@ public class PanelTablero extends JPanel{
 		for ( int i = 0; i< casillas.length; i++){
 			for( int j =0; j<casillas[0].length; j++){
 
-				int estado = principal.darEstado(i,j);
-				ImageIcon icono = new ImageIcon( principal.darRutaImagenes(estado));
+				Casilla c = principal.darCasilla(i, j);
+				ImageIcon icono = new ImageIcon( principal.darRutaImagenes(c));
+				if(c.esCercana())
+				{
+					casillas[i][j].setForeground(Color.CYAN);
+					casillas[i][j].setHorizontalTextPosition(JLabel.CENTER);
+					casillas[i][j].setText(c.darBombasCerca()+"");
+				}
+				else
+					casillas[i][j].setText("");
 				casillas[i][j].setIcon(icono);
-
 			}
 		}
 	}

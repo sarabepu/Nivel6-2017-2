@@ -63,21 +63,26 @@ public class InterfazJuego extends JFrame {
     }
   }
 
+  public Casilla darCasilla(int i, int j)
+  {
+	  return mundo.darCasillas(i, j);
+  }
 
-  public String darRutaImagenes(int estado){
+  public String darRutaImagenes(Casilla pCasilla){
     String rpta = "";
-    if (estado==Casilla.OBSTACULO)
+    
+    if (pCasilla.darEstado() == Casilla.OBSTACULO)
       rpta= "data/imagenes/obstaculo.png";
-    else if (estado==Casilla.NADA)
-      rpta= "data/imagenes/casilla_vacia.png";
-    else if (estado==Casilla.BOMBA)
-        rpta= "data/imagenes/casilla_vacia.png";
-    else if (estado==Casilla.TESORO)
-      rpta = "data/imagenes/tesoro.gif";
-    else if (estado==Casilla.JUGADOR)
-      rpta = "data/imagenes/jugador.gif";
-    else if(estado== Casilla.CERCANA)
+    else if(pCasilla.esCercana())
     rpta = "data/imagenes/casilla_iluminada.png";
+    else if (pCasilla.darEstado() == Casilla.NADA)
+      rpta= "data/imagenes/casilla_vacia.png";
+    else if (pCasilla.darEstado() == Casilla.BOMBA)
+        rpta= "data/imagenes/tesoro.gif";
+    else if (pCasilla.darEstado() == Casilla.TESORO)
+      rpta = "data/imagenes/tesoro.gif";
+    else if (pCasilla.darEstado() == Casilla.JUGADOR)
+      rpta = "data/imagenes/jugador.gif";
     return rpta;
   }
 
@@ -97,16 +102,16 @@ catch(Exception e)
 	if(e.getMessage().equals("Haz pisado una bomba"))
 	{
 	
-	finJuego("¡Pisaste una boma! Tu juego ha terminado");	
+	finJuego("ï¿½Pisaste una boma! Tu juego ha terminado");	
 	}
 	else if(e.getMessage().equals("Se terminaron los moviemtos"))
 	{
-		finJuego("¡te haz quedado sin movimientos! Tu juego ha terminado");
+		finJuego("ï¿½te haz quedado sin movimientos! Tu juego ha terminado");
 	}
 	
 	else if(e.getMessage().equals("Haz ganado"))
 	{
-		finJuego("¡Felicidades! Ganaste el juego");
+		finJuego("ï¿½Felicidades! Ganaste el juego");
 	}
 	
 	
@@ -146,12 +151,6 @@ catch(Exception e)
   public int darColumnaJugador()
   {
     return mundo.darColumnaJugador();
-  }
-  public void darVecinos()
-  {
-	  String mensaje= mundo.darVecinos();
-		JOptionPane.showMessageDialog( this, mensaje, "Cantidad visitas", JOptionPane.INFORMATION_MESSAGE);
-	
   }
 
   public void reiniciar() {
