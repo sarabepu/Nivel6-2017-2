@@ -201,13 +201,13 @@ catch(Exception e)
 
 public String darBombaFila() {
 	// TODO Auto-generated method stub
-	return null;
+	return mundo.numeroBombasFila()+"";
 }
 
 
 public String darBombaColumna() {
 	// TODO Auto-generated method stub
-	return null;
+	return mundo.numeroBombasColumna()+"";
 }
   
 

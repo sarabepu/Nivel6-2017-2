@@ -127,7 +127,7 @@ public class Mundo
 
 	public void mover( int i, int j) throws Exception
 	{
-		
+
 		if (cantidadMaxMovimientos == 0)
 			throw new Exception("Se terminaron los moviemtos");
 
@@ -192,8 +192,31 @@ public class Mundo
 			respuesta++;
 		return respuesta;
 	}
-	
-	
+
+	public int numeroBombasFila()
+	{ 
+		int respuesta=0;
+		for(int i=0; i<columnas; i++)
+		{
+			if(tablero[filaJugador][i].darEstado()==Casilla.BOMBA)
+			{
+				respuesta++;
+			}
+		}
+		return respuesta;
+	}
+	public int numeroBombasColumna()
+	{
+		int respuesta=0;
+		for(int i=0; i<filas; i++)
+		{
+			if(tablero[i][columnaJugador].darEstado()==Casilla.BOMBA)
+			{
+				respuesta++;
+			}
+		}
+		return respuesta;
+	}
 	public void bombasCasillas()
 	{
 		int numero = 0;
@@ -206,8 +229,8 @@ public class Mundo
 			}
 		}
 	}
-	
-	
+
+
 
 	public boolean estaEnElTablero(int i, int j)
 	{
@@ -220,41 +243,41 @@ public class Mundo
 			return true;
 		}
 	}
-	
+
 	public boolean esNadaOBomba(int i, int j)
 	{
 		return (darCasillas(i, j).darEstado() == Casilla.BOMBA || darCasillas(i, j).darEstado() == Casilla.NADA);
 	}
-	
-	
+
+
 
 	public void volverCercanas(int i, int j, boolean aCercana)
 	{
 		if (estaEnElTablero(i-1, j-1) && esNadaOBomba(i-1, j-1) )
 			darCasillas(i-1, j-1).cambiarEsCercana(aCercana);
-		
+
 		if (estaEnElTablero(i-1, j) && esNadaOBomba(i-1, j))
 			darCasillas(i-1, j).cambiarEsCercana(aCercana);
-		
+
 		if (estaEnElTablero(i-1, j+1) && esNadaOBomba(i-1, j+1))
 			darCasillas(i-1, j+1).cambiarEsCercana(aCercana);
-		
+
 		if (estaEnElTablero(i, j-1) && esNadaOBomba(i, j-1))
 			darCasillas(i, j-1).cambiarEsCercana(aCercana);
-		
+
 		if (estaEnElTablero(i, j+1) && esNadaOBomba(i, j+1))
 			darCasillas(i, j+1).cambiarEsCercana(aCercana);
-		
+
 		if (estaEnElTablero(i+1, j-1) && esNadaOBomba(i+1, j-1))
 			darCasillas(i+1, j-1).cambiarEsCercana(aCercana);
-		
+
 		if (estaEnElTablero(i+1, j) && esNadaOBomba(i+1, j))
 			darCasillas(i+1, j).cambiarEsCercana(aCercana);
-		
+
 		if (estaEnElTablero(i+1, j+1) && esNadaOBomba(i+1, j+1))
 			darCasillas(i+1, j+1).cambiarEsCercana(aCercana);
 	}
-	
+
 
 
 	public String Req1( )
