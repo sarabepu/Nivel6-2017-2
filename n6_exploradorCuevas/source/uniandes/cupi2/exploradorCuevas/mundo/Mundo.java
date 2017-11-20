@@ -20,7 +20,7 @@ public class Mundo
 	private int filaJugador;
 	private int columnaJugador;
 	private int cantidadMaxMovimientos;
-	private int cantidadVisitas;
+	private int numeroBombas;
 	private Properties datos;
 
 
@@ -46,10 +46,11 @@ public class Mundo
 	}
 
 	public  void inicializarTablero(Properties datos){
-
+		
+		numeroBombas = 0;
 		String numMovimientos = datos.getProperty("explorador.movimientos");
 		cantidadMaxMovimientos = Integer.parseInt(numMovimientos);
-
+		
 		String numeroFilas = datos.getProperty("explorador.filas");
 		filas = Integer.parseInt(numeroFilas);  
 
@@ -68,12 +69,13 @@ public class Mundo
 					filaJugador = i;
 					columnaJugador = j;
 				}
-
+				else if (estado == 'B')
+					numeroBombas++;
+						
 				tablero[i][j]= new Casilla (estado, i, j );
 			}
 		}
 		tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.JUGADOR);
-		System.out.println(filaJugador + "," + columnaJugador);
 	} 
 
 
@@ -110,36 +112,47 @@ public class Mundo
 	}
 	public int darMaxVisitas()
 	{
-		return cantidadVisitas;
+		return cantidadMaxMovimientos;
+	}
+	public int darNumeroBombas()
+	{
+		return numeroBombas;
 	}
 
 	public void mover( int i, int j) throws Exception
 	{
+		if (cantidadMaxMovimientos == 0)
+			throw new Exception("Se terminaron los moviemtos");
+		
+		if (tablero[i][j].darEstado()==(Casilla.BOMBA))
+		{
+			throw new Exception("Haz pisado una bomba");
+		}
+		
 
-		if (tablero[i][j].darEstado()==(Casilla.NADA) && cantidadMaxMovimientos > 0)
+		if (tablero[i][j].darEstado()==(Casilla.NADA))
 		{
 			tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.NADA);
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
 			filaJugador = i;
 			columnaJugador = j;
 			cantidadMaxMovimientos--;
-			
 
 		}
-		if (tablero[i][j].darEstado()==(Casilla.OBSTACULO))
-			throw new Exception("No se puede mover a un obstaculo");
-
-		if (tablero[i][j].darEstado()==(Casilla.TESORO) && cantidadMaxMovimientos > 0)
+		
+		if (tablero[i][j].darEstado()==(Casilla.TESORO) )
 		{
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
 			filaJugador = i;
 			columnaJugador = j;
 			cantidadMaxMovimientos--;
+			throw new Exception("Haz ganado");
 		}
-
+		
+		
 
 	}
-
+	
 
 	public String darVecinos()
 	{
@@ -152,9 +165,9 @@ public class Mundo
 		String izquierda="";
 		String derecha= "";
 		String abajo= "";
-
+		
 		return null;
-
+		
 	}
 
 
