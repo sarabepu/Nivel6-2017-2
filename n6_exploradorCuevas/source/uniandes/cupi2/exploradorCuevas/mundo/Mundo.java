@@ -19,19 +19,13 @@ public class Mundo
 
 	private int filaJugador;
 	private int columnaJugador;
-	private int chips;
-	private  int llaveAmarilla;
-	private int llaveRoja;
-	private int llaveAzul;
+	private int cantidadMaxMovimientos;
 	private int cantidadVisitas;
 	private Properties datos;
 
 
 	public Mundo (File arch) throws Exception{
 		datos = cargarTablero(arch);
-		llaveAmarilla=0;
-		llaveRoja=0;
-		llaveAzul=0;
 		inicializarTablero(datos);
 
 	}
@@ -52,30 +46,29 @@ public class Mundo
 	}
 
 	public  void inicializarTablero(Properties datos){
-		String numeroFilas = datos.getProperty("desafio.filas");
+		
+		String numMovimientos = datos.getProperty("explorador.movimientos");
+		cantidadMaxMovimientos = Integer.parseInt(numMovimientos);
+		
+		String numeroFilas = datos.getProperty("explorador.filas");
 		filas = Integer.parseInt(numeroFilas);  
 
-		String numeroColumnas= datos.getProperty("desafio.columnas");
+		String numeroColumnas= datos.getProperty("explorador.columnas");
 		columnas = Integer.parseInt(numeroColumnas);  
 
-		String fila= datos.getProperty("desafio.jugador.posX");
-		filaJugador = Integer.parseInt(fila);
-
-		String columna= datos.getProperty("desafio.jugador.posY");
-		columnaJugador = Integer.parseInt(columna);
-
-		String nChips= datos.getProperty("desafio.chips");
-		chips = Integer.parseInt(nChips);
-
-		String visitas= datos.getProperty("desafio.cantidadMaximaVisitas");
-		cantidadVisitas = Integer.parseInt(visitas);
 
 		tablero = new Casilla [filas][columnas];
 
 		for (int i = 0; i<filas; i++){
 			for(int j = 0; j<columnas; j++){
-				String[] filaActual = datos.getProperty("desafio.fila"+i).split("-");
-				int estado = Integer.parseInt(filaActual[j]);
+				char[] filaActual = datos.getProperty("explorador.fila"+i).toCharArray();
+				char estado = filaActual[j];
+				if (estado == 'J')
+				{
+					filaJugador = j;
+					columnaJugador = i;
+				}
+						
 				tablero[i][j]= new Casilla (estado, i, j );
 			}
 		}
@@ -115,22 +108,6 @@ public class Mundo
 	{
 		return columnaJugador;
 	}
-	public int darChips()
-	{
-		return chips;
-	}
-	public int darAmarillas()
-	{
-		return llaveAmarilla;
-	}
-	public int darAzules()
-	{
-		return llaveAzul;
-	}
-	public int darRojas()
-	{
-		return llaveRoja;
-	}
 	public int darMaxVisitas()
 	{
 		return cantidadVisitas;
@@ -139,182 +116,28 @@ public class Mundo
 	public void mover( int i, int j) throws Exception
 	{
 
-		if (tablero[i][j].darEstado()==(Casilla.VACIA))
+		if (tablero[i][j].darEstado()==(Casilla.NADA) && cantidadMaxMovimientos > 0)
 		{
-			if(tablero[filaJugador][columnaJugador].darVisitas()>=cantidadVisitas)
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.OBSTACULO);
-			}
-			else
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.VACIA);
-			}
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
 			tablero[i][j].agregarVisitas();
 			filaJugador = i;
 			columnaJugador = j;
+			cantidadMaxMovimientos--;
 
 		}
-		else if (tablero[i][j].darEstado()==Casilla.CHIP)
+		if (tablero[i][j].darEstado()==(Casilla.OBSTACULO))
+			throw new Exception("No se puede mover a un obstaculo");
+		
+		if (tablero[i][j].darEstado()==(Casilla.TESORO) && cantidadMaxMovimientos > 0)
 		{
-			if(tablero[filaJugador][columnaJugador].darVisitas()>=cantidadVisitas)
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.OBSTACULO);
-			}
-			else
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.VACIA);
-			}
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
 			tablero[i][j].agregarVisitas();
 			filaJugador = i;
 			columnaJugador = j;
-			chips--;
+			cantidadMaxMovimientos--;
 		}
-		else if (tablero[i][j].darEstado()==Casilla.SALIDA && chips == 0)
-		{
-			if(tablero[filaJugador][columnaJugador].darVisitas()>=cantidadVisitas)
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.OBSTACULO);
-			}
-			else
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.VACIA);
-			}
-			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
-			tablero[i][j].agregarVisitas();
-			filaJugador = i;
-			columnaJugador = j;
-		}
-		else if (tablero[i][j].darEstado()==Casilla.SALIDA && chips != 0)
-		{
-			throw new Exception ("No ha recogido todos los chips");
-		}
-		else if (tablero[i][j].darEstado()==Casilla.PREMIO)
-		{
-			if(tablero[filaJugador][columnaJugador].darVisitas()>=cantidadVisitas)
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.OBSTACULO);
-			}
-			else
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.VACIA);
-			}
-			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
-			tablero[i][j].agregarVisitas();
-			filaJugador = i;
-			columnaJugador = j;
-			throw new Exception ("¡Felicitaciones! Gano el juego");
-		}
-		else if (tablero[i][j].darEstado()==Casilla.LLAVE_AMARILLA)
-		{
-			if(tablero[filaJugador][columnaJugador].darVisitas()>=cantidadVisitas)
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.OBSTACULO);
-			}
-			else
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.VACIA);
-			}
-			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
-			tablero[i][j].agregarVisitas();
-			filaJugador = i;
-			columnaJugador = j;
-			llaveAmarilla++;
-		}
-		else if (tablero[i][j].darEstado()==Casilla.PUERTA_AMARILLA && llaveAmarilla >= 1)
-		{
-			if(tablero[filaJugador][columnaJugador].darVisitas()>=cantidadVisitas)
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.OBSTACULO);
-			}
-			else
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.VACIA);
-			}
-			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
-			tablero[i][j].agregarVisitas();
-			filaJugador = i;
-			columnaJugador = j;
-			llaveAmarilla--;
-		}
-		else if (tablero[i][j].darEstado()==Casilla.PUERTA_AMARILLA && llaveAmarilla == 0)
-		{
-			throw new Exception ("No tiene la llave para abrir la puerta");
-		}
+			
 
-		else if (tablero[i][j].darEstado()==Casilla.LLAVE_ROJA)
-		{
-			if(tablero[filaJugador][columnaJugador].darVisitas()>=cantidadVisitas)
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.OBSTACULO);
-			}
-			else
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.VACIA);
-			}
-			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
-			tablero[i][j].agregarVisitas();
-			filaJugador = i;
-			columnaJugador = j;
-			llaveRoja++;
-		}
-		else if (tablero[i][j].darEstado()==Casilla.PUERTA_ROJA && llaveRoja >= 1)
-		{
-			if(tablero[filaJugador][columnaJugador].darVisitas()>=cantidadVisitas)
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.OBSTACULO);
-			}
-			else
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.VACIA);
-			}
-			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
-			tablero[i][j].agregarVisitas();
-			filaJugador = i;
-			columnaJugador = j;
-			llaveRoja--;
-		}
-		else if (tablero[i][j].darEstado()==Casilla.PUERTA_ROJA && llaveRoja == 0)
-		{
-			throw new Exception ("No tiene la llave para abrir la puerta");
-		}
-		else if (tablero[i][j].darEstado()==Casilla.LLAVE_AZUL)
-		{
-			if(tablero[filaJugador][columnaJugador].darVisitas()>=cantidadVisitas)
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.OBSTACULO);
-			}
-			else
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.VACIA);
-			}
-			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
-			tablero[i][j].agregarVisitas();
-			filaJugador = i;
-			columnaJugador = j;
-			llaveAzul++;
-		}
-		else if (tablero[i][j].darEstado()==Casilla.PUERTA_AZUL && llaveAzul >= 1)
-		{
-			if(tablero[filaJugador][columnaJugador].darVisitas()>=cantidadVisitas)
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.OBSTACULO);
-			}
-			else
-			{
-				tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.VACIA);
-			}
-			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
-			tablero[i][j].agregarVisitas();
-			filaJugador = i;
-			columnaJugador = j;
-			llaveAzul--;
-		}
-		else if (tablero[i][j].darEstado()==Casilla.PUERTA_AZUL && llaveAzul == 0)
-		{
-			throw new Exception ("No tiene la llave para abrir la puerta");
-		}
 	}
 
 	public String ColumnaMasVisitada()
