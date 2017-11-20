@@ -78,7 +78,7 @@ public class InterfazJuego extends JFrame {
     else if (pCasilla.darEstado() == Casilla.NADA)
       rpta= "data/imagenes/casilla_vacia.png";
     else if (pCasilla.darEstado() == Casilla.BOMBA)
-        rpta= "data/imagenes/casilla_vacia.gif";
+        rpta= "data/imagenes/casilla_vacia.png";
     else if (pCasilla.darEstado() == Casilla.TESORO)
       rpta = "data/imagenes/tesoro.gif";
     else if (pCasilla.darEstado() == Casilla.JUGADOR)
@@ -91,27 +91,27 @@ public class InterfazJuego extends JFrame {
 try
 {
     mundo.mover(i,j);
-    panelTablero.actualizarMapa();
+    panelTablero.inicializar();;
     panelInformacion.actualizar();
     //Actualizar numeros de visitas
 }
 catch(Exception e)
 {
-	panelTablero.actualizarMapa();
+	panelTablero.inicializar();
 	panelInformacion.actualizar();
 	if(e.getMessage().equals("Haz pisado una bomba"))
 	{
 	
-	finJuego("ï¿½Pisaste una boma! Tu juego ha terminado");	
+	finJuego("¡Pisaste una boma! Tu juego ha terminado");	
 	}
 	else if(e.getMessage().equals("Se terminaron los moviemtos"))
 	{
-		finJuego("ï¿½te haz quedado sin movimientos! Tu juego ha terminado");
+		finJuego("¡Te haz quedado sin movimientos! Tu juego ha terminado");
 	}
 	
 	else if(e.getMessage().equals("Haz ganado"))
 	{
-		finJuego("ï¿½Felicidades! Ganaste el juego");
+		finJuego("¡Felicidades! Ganaste el juego");
 	}
 	
 	

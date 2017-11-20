@@ -117,7 +117,6 @@ public class Mundo
 	}
 	public int darMaxMovs()
 	{
-		System.out.println(cantidadMaxMovimientos	);
 		return cantidadMaxMovimientos;
 
 	}

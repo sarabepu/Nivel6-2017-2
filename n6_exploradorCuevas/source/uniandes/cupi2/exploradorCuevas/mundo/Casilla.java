@@ -3,7 +3,6 @@ package uniandes.cupi2.exploradorCuevas.mundo;
 public class Casilla {
 	public final static char NADA = 'N';
 	public final static char JUGADOR = 'J';
-	public final static char CERCANA = 'C';
 	public final static char OBSTACULO = 'O';
 	public final static char TESORO = 'T';
 	public final static char BOMBA = 'B';
