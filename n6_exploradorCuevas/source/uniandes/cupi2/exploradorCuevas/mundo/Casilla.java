@@ -7,7 +7,6 @@ public class Casilla {
 	public final static char OBSTACULO = 'O';
 	public final static char TESORO = 'T';
 	public final static char BOMBA = 'B';
-	public final static char PERDIO = 'P';
 	
 	private int estado;
 	private int columna;
