@@ -92,9 +92,9 @@ try
 }
 catch(Exception e)
 {
-	if(e.getMessage().equals("No tiene la llave para abrir la puerta"))
+	if(e.getMessage().equals("Haz pisado una bomba"))
 	{
-		JOptionPane.showMessageDialog( this, e.getMessage(), "Mover", JOptionPane.ERROR_MESSAGE);
+	finJuego("¡Pisaste una boma! Tu juego ha terminado");	
 	}
 	else if(e.getMessage().equals("No ha recogido todos los chips"))
 	{
@@ -126,7 +126,7 @@ catch(Exception e)
   }
   public String darTotal()
   {
-	  return null;
+	  return String.valueOf(mundo.darNumeroBombas());
   }
 
   public int darEstado(int i, int j)

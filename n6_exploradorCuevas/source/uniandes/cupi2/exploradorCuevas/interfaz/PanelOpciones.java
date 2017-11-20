@@ -86,7 +86,7 @@ public class PanelOpciones extends JPanel implements ActionListener {
 	}
 
 	public void finJuego() {
-		
+		reiniciar.setEnabled(false);
 		opcion1.setEnabled(false);
 		opcion2.setEnabled(false);
 	}

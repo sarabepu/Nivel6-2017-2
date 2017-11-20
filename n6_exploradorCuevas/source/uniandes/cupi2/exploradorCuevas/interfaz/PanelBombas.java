@@ -67,6 +67,13 @@ public class PanelBombas extends JPanel  {
 	  
   }
 
+public void finJuego() {
+	txtTotal.setEnabled(false);
+	txtFila.setEnabled(false);
+	txtColumna.setEnabled(false);
+	
+}
+
 
 
 }

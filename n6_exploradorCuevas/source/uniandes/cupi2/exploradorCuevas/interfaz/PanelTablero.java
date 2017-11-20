@@ -72,14 +72,7 @@ public class PanelTablero extends JPanel{
 		}
 	}
 	public void finJuego(){
-		for ( int i = 0; i< casillas.length; i++){
-			for( int j =0; j<casillas[0].length; j++){
-				JLabel actual = casillas [i][j];
-				actual.setEnabled(false);
-
-
-			}
-		}
+		casillas[principal.darFilaJugador()][principal.darColumnaJugador()].setIcon(new ImageIcon("data/imagenes/jugador_quemado.png"));
 	}
 	
 
