@@ -73,7 +73,6 @@ public class Mundo
 			}
 		}
 		tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.JUGADOR);
-		tablero[filaJugador][columnaJugador].agregarVisitas();
 	} 
 
 
@@ -119,7 +118,6 @@ public class Mundo
 		if (tablero[i][j].darEstado()==(Casilla.NADA) && cantidadMaxMovimientos > 0)
 		{
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
-			tablero[i][j].agregarVisitas();
 			filaJugador = i;
 			columnaJugador = j;
 			cantidadMaxMovimientos--;
@@ -131,7 +129,6 @@ public class Mundo
 		if (tablero[i][j].darEstado()==(Casilla.TESORO) && cantidadMaxMovimientos > 0)
 		{
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
-			tablero[i][j].agregarVisitas();
 			filaJugador = i;
 			columnaJugador = j;
 			cantidadMaxMovimientos--;
@@ -140,51 +137,6 @@ public class Mundo
 
 	}
 
-	public String ColumnaMasVisitada()
-	{
-		int columna = 0;
-		int sumaParcial = 0;
-		int sumaMayor = 0;
-		for (int j = 0; j < filas; j++)
-		{
-			sumaParcial = 0;
-			for (int i = 0; i < filas; i++)
-			{
-				sumaParcial += tablero[i][j].darVisitas();
-			}
-			if (sumaParcial > sumaMayor)
-			{
-				sumaMayor = sumaParcial;
-				columna = j;
-			}
-			if (sumaMayor == 0)
-				columna = columnaJugador;
-		}
-		return "la columna más visita es: "+columna;
-	}
-
-	public String FilaMasVisitada()
-	{
-		int fila = 0;
-		int sumaParcial = 0;
-		int sumaMayor = 0;
-		for (int i = 0; i < filas; i++)
-		{
-			sumaParcial = 0;
-			for (int j = 0; j < filas; j++)
-			{
-				sumaParcial += tablero[i][j].darVisitas();
-			}
-			if (sumaParcial > sumaMayor)
-			{
-				sumaMayor = sumaParcial;
-				fila = i;
-			}
-			if (sumaMayor == 0)
-				fila = filaJugador;
-		}
-		return "la fila más visitada es: "+fila;
-	}
 
 	public String darVecinos()
 	{
@@ -198,33 +150,8 @@ public class Mundo
 		String derecha= "";
 		String abajo= "";
 		
-		if(estaEnElTablero(filaJugador-1, columnaJugador-1))
-			arribaIzquierda+= tablero[filaJugador-1][columnaJugador-1].darVisitas();
+		return null;
 		
-		if(estaEnElTablero(filaJugador-1, columnaJugador+1)) 
-			arribaDerecha+=tablero[filaJugador-1][columnaJugador+1].darVisitas();
-		
-		if(estaEnElTablero(filaJugador+1, columnaJugador-1))  
-			abajoIzquierda+= tablero[filaJugador+1][columnaJugador-1].darVisitas();
-		
-		if(estaEnElTablero(filaJugador+1, columnaJugador+1))   
-			abajoDerecha+= tablero[filaJugador+1][columnaJugador+1].darVisitas();
-		
-		if(estaEnElTablero(filaJugador-1, columnaJugador))    
-			arriba+= tablero[filaJugador-1][columnaJugador].darVisitas();
-		
-		if(estaEnElTablero(filaJugador, columnaJugador-1))    
-			izquierda+= tablero[filaJugador][columnaJugador-1].darVisitas();
-		
-		if(estaEnElTablero(filaJugador, columnaJugador+1))    
-			derecha+= tablero[filaJugador][columnaJugador+1].darVisitas();
-		
-		if(estaEnElTablero(filaJugador+1, columnaJugador))    
-			abajo+= tablero[filaJugador+1][columnaJugador].darVisitas();
-
-		return ("" + arribaIzquierda + " " + arriba+ " " +arribaDerecha + "\n"
-				+ izquierda+ " " + "x" + " " +derecha+ "\n" + 
-				abajoIzquierda+ " " + abajo+ " " +abajoDerecha);
 	}
 
 
