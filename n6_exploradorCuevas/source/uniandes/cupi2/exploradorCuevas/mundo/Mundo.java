@@ -65,8 +65,8 @@ public class Mundo
 				char estado = filaActual[j];
 				if (estado == 'J')
 				{
-					filaJugador = j;
-					columnaJugador = i;
+					filaJugador = i;
+					columnaJugador = j;
 				}
 						
 				tablero[i][j]= new Casilla (estado, i, j );
@@ -117,10 +117,12 @@ public class Mundo
 
 		if (tablero[i][j].darEstado()==(Casilla.NADA) && cantidadMaxMovimientos > 0)
 		{
+			tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.NADA);
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
 			filaJugador = i;
 			columnaJugador = j;
 			cantidadMaxMovimientos--;
+			
 
 		}
 		if (tablero[i][j].darEstado()==(Casilla.OBSTACULO))
