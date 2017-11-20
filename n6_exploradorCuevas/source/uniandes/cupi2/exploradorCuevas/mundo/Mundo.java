@@ -112,6 +112,7 @@ public class Mundo
 	}
 	public int darMaxVisitas()
 	{
+		System.out.println(cantidadMaxMovimientos	);
 		return cantidadMaxMovimientos;
 	}
 	public int darNumeroBombas()
@@ -126,6 +127,11 @@ public class Mundo
 		
 		if (tablero[i][j].darEstado()==(Casilla.BOMBA))
 		{
+			tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.NADA);
+			tablero[i][j].cambiarEstado(Casilla.PERDIO);
+			filaJugador = i;
+			columnaJugador = j;
+			cantidadMaxMovimientos--;
 			throw new Exception("Haz pisado una bomba");
 		}
 		
@@ -152,6 +158,19 @@ public class Mundo
 		
 
 	}
+	
+	
+	
+	public ArrayList<Casilla> obtenerVecinos(int i, int j)
+	{
+		ArrayList<Casilla> respuesta = new ArrayList<Casilla>();
+		
+		return respuesta;
+		
+	}
+	
+	
+	
 	
 
 	public String darVecinos()
