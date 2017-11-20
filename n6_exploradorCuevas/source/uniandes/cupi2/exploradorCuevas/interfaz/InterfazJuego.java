@@ -192,11 +192,11 @@ catch(Exception e)
 
 
   public void finJuego(String mensaje) {
-		JOptionPane.showMessageDialog( this, mensaje, "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
 		panelInformacion.finJuego();
 		panelOpciones.finJuego();
 		panelTablero.finJuego();
-
+		JOptionPane.showMessageDialog( this, mensaje, "Juego Terminado", JOptionPane.INFORMATION_MESSAGE);
+		
 	}
 
 

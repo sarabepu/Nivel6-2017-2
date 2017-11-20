@@ -129,6 +129,7 @@ public class Mundo
 		if (tablero[i][j].darEstado()==(Casilla.BOMBA))
 		{
 			tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.NADA);
+			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
 			filaJugador = i;
 			columnaJugador = j;
 			cantidadMaxMovimientos--;
