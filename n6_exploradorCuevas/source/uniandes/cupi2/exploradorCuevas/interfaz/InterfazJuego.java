@@ -78,7 +78,7 @@ public class InterfazJuego extends JFrame {
     else if (pCasilla.darEstado() == Casilla.NADA)
       rpta= "data/imagenes/casilla_vacia.png";
     else if (pCasilla.darEstado() == Casilla.BOMBA)
-        rpta= "data/imagenes/tesoro.gif";
+        rpta= "data/imagenes/casilla_vacia.gif";
     else if (pCasilla.darEstado() == Casilla.TESORO)
       rpta = "data/imagenes/tesoro.gif";
     else if (pCasilla.darEstado() == Casilla.JUGADOR)
