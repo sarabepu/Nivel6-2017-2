@@ -2,6 +2,7 @@ package uniandes.cupi2.exploradorCuevas.interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 public class PanelInformacion  extends JPanel implements ActionListener{
@@ -24,10 +26,12 @@ public class PanelInformacion  extends JPanel implements ActionListener{
 		setLayout(new BorderLayout());
 
 		movimientos= new JPanel();
-		mov= new JLabel("--");
+		mov = new JLabel("--", SwingConstants.CENTER);
+		mov.setForeground(Color.BLACK);
+		mov.setFont(new Font("--", 50, 50));
 		movimientos.add(mov);
 		add(movimientos, BorderLayout.NORTH);
-		TitledBorder border = BorderFactory.createTitledBorder( "Movimeintos restantes");
+		TitledBorder border = BorderFactory.createTitledBorder( "Movimientos restantes");
 	    border.setTitleColor( Color.BLACK );
 	    movimientos.setBorder( border );
 	    
@@ -41,6 +45,7 @@ public class PanelInformacion  extends JPanel implements ActionListener{
 	}
 	public void inicializar()
 	{
+		mov.setText(""+ principal.darMovs());
 		controles.inicializar();
 		bombas.actualizar();
 	}
