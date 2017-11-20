@@ -19,7 +19,7 @@ public class InterfazJuego extends JFrame {
 
 
   public InterfazJuego(){
-    setSize(new Dimension(913, 694));
+    setSize(new Dimension(790, 694));
     setLayout (new BorderLayout());
     setResizable(true);
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
