@@ -26,9 +26,9 @@ public class InterfazJuego extends JFrame {
 
     panelImagen =new PanelImagen();
     add(panelImagen, BorderLayout.NORTH);
-//
-//    panelOpciones =new PanelOpciones(this);
-//    add(panelOpciones, BorderLayout.SOUTH);
+
+    panelOpciones =new PanelOpciones(this);
+    add(panelOpciones, BorderLayout.SOUTH);
 
     panelTablero = new PanelTablero(this);
     add(panelTablero, BorderLayout.CENTER);
@@ -68,13 +68,15 @@ public class InterfazJuego extends JFrame {
     String rpta = "";
     if (estado==Casilla.OBSTACULO)
       rpta= "data/imagenes/obstaculo.png";
-    else if (estado==Casilla.VACIA)
+    else if (estado==Casilla.NADA)
       rpta= "data/imagenes/casilla_vacia.png";
+    else if (estado==Casilla.BOMBA)
+        rpta= "data/imagenes/casilla_vacia.png";
     else if (estado==Casilla.TESORO)
       rpta = "data/imagenes/tesoro.gif";
     else if (estado==Casilla.JUGADOR)
       rpta = "data/imagenes/jugador.gif";
-    else if(estado== Casilla.ILUMINADA)
+    else if(estado== Casilla.CERCANA)
     rpta = "data/imagenes/casilla_iluminada.png";
     return rpta;
   }

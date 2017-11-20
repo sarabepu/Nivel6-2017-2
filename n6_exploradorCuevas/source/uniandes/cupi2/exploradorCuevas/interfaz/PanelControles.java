@@ -133,9 +133,13 @@ public class PanelControles extends JPanel implements ActionListener {
 	}
 	public void inicializar (){
 		abajo.setEnabled(true);
+		abajoD.setEnabled(true);
+		abajoI.setEnabled(true);
 		arriba.setEnabled(true);
 		derecha.setEnabled(true);
-		izquierda.setEnabled(true);		
+		izquierda.setEnabled(true);	
+		arribaD.setEnabled(true);
+		arribaI.setEnabled(true);
 	}
 
 

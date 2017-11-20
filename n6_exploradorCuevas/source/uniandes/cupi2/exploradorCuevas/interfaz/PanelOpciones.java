@@ -34,7 +34,6 @@ public class PanelOpciones extends JPanel implements ActionListener {
 		border.setTitleColor( Color.BLACK );
 		setBorder( border );
 		setLayout(new GridLayout(1,4));
-		setPreferredSize(new Dimension(180, 720));
 
 		cargar = new JButton ("Cargar");
 		cargar.setActionCommand(CARGAR);
