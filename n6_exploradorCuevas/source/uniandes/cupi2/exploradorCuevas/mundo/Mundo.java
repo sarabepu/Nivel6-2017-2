@@ -20,9 +20,6 @@ public class Mundo
 	private int filaJugador;
 	private int columnaJugador;
 	private int cantidadMaxMovimientos;
-
-	private int cantidaVisitas;
-
 	private int numeroBombas;
 	private Properties datos;
 
@@ -132,7 +129,6 @@ public class Mundo
 		if (tablero[i][j].darEstado()==(Casilla.BOMBA))
 		{
 			tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.NADA);
-			tablero[i][j].cambiarEstado(Casilla.PERDIO);
 			filaJugador = i;
 			columnaJugador = j;
 			cantidadMaxMovimientos--;
@@ -168,9 +164,49 @@ public class Mundo
 	public ArrayList<Casilla> obtenerVecinos(int i, int j)
 	{
 		ArrayList<Casilla> respuesta = new ArrayList<Casilla>();
+		if (estaEnElTablero(i-1, j-1))
+			respuesta.add(tablero[i-1][j-1]);
+		if (estaEnElTablero(i-1, j))
+			respuesta.add(tablero[i-1][j]);
+		if (estaEnElTablero(i-1, j-1))
+			respuesta.add(tablero[i-1][j-1]);
+		if (estaEnElTablero(i-1, j+1))
+			respuesta.add(tablero[i-1][j+1]);
+		if (estaEnElTablero(i, j-1))
+			respuesta.add(tablero[i][j-1]);
+		if (estaEnElTablero(i, j+1))
+			respuesta.add(tablero[i][j+1]);
+		if (estaEnElTablero(i+1, j-1))
+			respuesta.add(tablero[i+1][j-1]);
+		if (estaEnElTablero(i+1, j))
+			respuesta.add(tablero[i+1][j]);
+		if (estaEnElTablero(i+1, j+1))
+			respuesta.add(tablero[i+1][j+1]);
 		
 		return respuesta;
-		
+	}
+	
+	
+	public int numeroBombasCercanas(int i, int j)
+	{
+		int respuesta = 0;
+		if (estaEnElTablero(i-1, j-1) && tablero[i-1][j-1].darEstado() == Casilla.BOMBA)
+			respuesta++;
+		if (estaEnElTablero(i-1, j) && tablero[i-1][j].darEstado() == Casilla.BOMBA)
+			respuesta++;
+		if (estaEnElTablero(i-1, j+1) && tablero[i-1][j+1].darEstado() == Casilla.BOMBA)
+			respuesta++;
+		if (estaEnElTablero(i, j-1) && tablero[i][j-1].darEstado() == Casilla.BOMBA)
+			respuesta++;
+		if (estaEnElTablero(i, j+1) && tablero[i][j+11].darEstado() == Casilla.BOMBA)
+			respuesta++;
+		if (estaEnElTablero(i+1, j-1) && tablero[i+1][j-1].darEstado() == Casilla.BOMBA)
+			respuesta++;
+		if (estaEnElTablero(i+1, j) && tablero[i+1][j].darEstado() == Casilla.BOMBA)
+			respuesta++;
+		if (estaEnElTablero(i+1, j+1) && tablero[i+1][j+1].darEstado() == Casilla.BOMBA)
+			respuesta++;
+		return respuesta;
 	}
 	
 	
