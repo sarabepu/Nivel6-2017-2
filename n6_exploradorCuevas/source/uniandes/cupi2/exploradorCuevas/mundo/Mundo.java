@@ -128,7 +128,10 @@ public class Mundo
 	{
 
 		if (cantidadMaxMovimientos == 1)
+		{
+			cantidadMaxMovimientos--;
 			throw new Exception("Se terminaron los moviemtos");
+		}
 
 		if (tablero[i][j].darEstado()==(Casilla.BOMBA))
 		{

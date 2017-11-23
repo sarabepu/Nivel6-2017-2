@@ -18,61 +18,64 @@ import javax.swing.border.TitledBorder;
 
 public class PanelBombas extends JPanel  {
 
-  private InterfazJuego principal;
-  private JLabel total;
-  private JLabel fila;
-  private JLabel columna;
-  private JTextField txtTotal;
-  private JTextField txtFila;
-  private JTextField txtColumna;
+	private InterfazJuego principal;
+	private JLabel total;
+	private JLabel fila;
+	private JLabel columna;
+	private JTextField txtTotal;
+	private JTextField txtFila;
+	private JTextField txtColumna;
 
-  
-  public PanelBombas	(InterfazJuego v)
-  {
-	  principal = v;
-	  inicializar();
-  }
-  
-  public void inicializar()
-  {
-	    total=new JLabel("Total");
-	    fila= new JLabel("Fila actual");
-	    columna= new JLabel ("Columna actual");
-	    txtTotal= new JTextField();
-	    txtTotal.setEditable(false);
-	    txtColumna= new JTextField();
-	    txtColumna.setEditable(false);
-	    txtFila= new JTextField();
-	    txtFila.setEditable(false);
-	    
-	    
-	    setLayout(new GridLayout(3, 2));
-	    TitledBorder border = BorderFactory.createTitledBorder( "Cantidad bombas");
-	    border.setTitleColor( Color.BLACK );
-	    setBorder( border );
-	    
-	    add(total);
-	    add(txtTotal);
-	    add(fila);
-	    add(txtFila);
-	    add(columna);
-	    add(txtColumna);
-  }
-  
-  public void actualizar()
-  {
-	  txtTotal.setText(""+principal.darTotal());
-	  txtFila.setText(""+principal.darBombaFila());
-	  txtColumna.setText(""+principal.darBombaColumna());
-	  
-  }
 
-public void finJuego() {
-	txtTotal.setEnabled(false);
-	txtFila.setEnabled(false);
-	txtColumna.setEnabled(false);
-	
-}
+	public PanelBombas	(InterfazJuego v)
+	{
+		principal = v;
+		inicializar();
+	}
+
+	public void inicializar()
+	{
+		total=new JLabel("Total");
+		fila= new JLabel("Fila actual");
+		columna= new JLabel ("Columna actual");
+		txtTotal= new JTextField();
+		txtTotal.setEditable(false);
+		txtColumna= new JTextField();
+		txtColumna.setEditable(false);
+		txtFila= new JTextField();
+		txtFila.setEditable(false);
+
+
+		setLayout(new GridLayout(3, 2));
+		TitledBorder border = BorderFactory.createTitledBorder( "Cantidad bombas");
+		border.setTitleColor( Color.BLACK );
+		setBorder( border );
+
+		add(total);
+		add(txtTotal);
+		add(fila);
+		add(txtFila);
+		add(columna);
+		add(txtColumna);
+	}
+
+	public void actualizar()
+	{
+		txtTotal.setEnabled(true);
+		txtFila.setEnabled(true);
+		txtColumna.setEnabled(true);
+		txtTotal.setText(""+principal.darTotal());
+		txtFila.setText(""+principal.darBombaFila());
+		txtColumna.setText(""+principal.darBombaColumna());
+
+	}
+
+	public void finJuego() {
+		txtTotal.setEnabled(false);
+		txtFila.setEnabled(false);
+		txtColumna.setEnabled(false);
+
+	}
 
 
 
