@@ -159,6 +159,7 @@ public class Mundo
 
 		if (tablero[i][j].darEstado()==(Casilla.TESORO) )
 		{
+			volverCercanas(filaJugador, columnaJugador, false);
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
 			tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.NADA);
 			filaJugador = i;
