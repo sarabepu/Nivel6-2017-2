@@ -75,7 +75,6 @@ public class Mundo
 				tablero[i][j]= new Casilla (estado, i, j );
 			}
 		}
-		tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.JUGADOR);
 		volverCercanas(filaJugador, columnaJugador, true);
 		bombasCasillas();
 	} 
@@ -158,8 +157,10 @@ public class Mundo
 		if (tablero[i][j].darEstado()==(Casilla.TESORO) )
 		{
 			tablero[i][j].cambiarEstado(Casilla.JUGADOR);
+			tablero[filaJugador][columnaJugador].cambiarEstado(Casilla.NADA);
 			filaJugador = i;
 			columnaJugador = j;
+			volverCercanas(filaJugador, columnaJugador, true);
 			cantidadMaxMovimientos--;
 			throw new Exception("Haz ganado");
 		}

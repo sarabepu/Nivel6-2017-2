@@ -47,7 +47,6 @@ public class PanelTablero extends JPanel{
 					ImageIcon icono = new ImageIcon( principal.darRutaImagenes(c));
 					if(c.esCercana())
 					{
-						System.out.println("llego aca: "+c.darBombasCerca());
 						actual.setForeground(Color.CYAN);
 						actual.setHorizontalTextPosition(JLabel.CENTER);
 						actual.setText(c.darBombasCerca()+"");
