@@ -19,7 +19,7 @@ public class InterfazJuego extends JFrame {
 
 
 	public InterfazJuego(){
-		setSize(new Dimension(790, 694));
+		setSize(new Dimension(720, 694));
 		setLayout (new BorderLayout());
 		setResizable(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -113,6 +113,12 @@ public class InterfazJuego extends JFrame {
 			{
 				finJuego("¡Felicidades! Ganaste el juego");
 			}
+			else if(e.getMessage().equals("No se puede mover en esa dirección"))
+			{
+				JOptionPane.showMessageDialog( this, e.getMessage(), "Cuidado", JOptionPane.INFORMATION_MESSAGE);
+
+			}
+			
 
 
 		}

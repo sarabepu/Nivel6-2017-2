@@ -46,6 +46,7 @@ public class PanelControles extends JPanel implements ActionListener {
 		border.setTitleColor( Color.BLACK );
 		setBorder( border );
 		setLayout(new GridLayout(5,3));
+		setPreferredSize(new Dimension(50,50));
 		arribaD = new JButton ();
 		arribaD.setIcon(new ImageIcon("data/imagenes/direccion-0.png"));
 		arribaD.setEnabled(false);

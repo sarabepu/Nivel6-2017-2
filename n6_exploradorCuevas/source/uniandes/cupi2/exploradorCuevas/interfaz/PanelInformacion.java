@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-public class PanelInformacion  extends JPanel implements ActionListener{
+public class PanelInformacion  extends JPanel {
 	private PanelControles controles;
 	private PanelBombas bombas;
 	private JPanel movimientos;
@@ -55,10 +55,7 @@ public class PanelInformacion  extends JPanel implements ActionListener{
 		mov.setText(""+ principal.darMovs());
 		bombas.actualizar();
 	}
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	public void finJuego() {
 		// TODO Auto-generated method stub
 		controles.finJuego();

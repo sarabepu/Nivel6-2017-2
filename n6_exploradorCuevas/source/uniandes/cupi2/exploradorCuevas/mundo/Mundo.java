@@ -132,7 +132,11 @@ public class Mundo
 			cantidadMaxMovimientos--;
 			throw new Exception("Se terminaron los moviemtos");
 		}
-
+		
+		if (tablero[i][j].darEstado()==(Casilla.OBSTACULO))
+		{
+			throw new Exception("No se puede mover en esa dirección");
+		}
 		if (tablero[i][j].darEstado()==(Casilla.BOMBA))
 		{
 			volverCercanas(filaJugador, columnaJugador, false);
