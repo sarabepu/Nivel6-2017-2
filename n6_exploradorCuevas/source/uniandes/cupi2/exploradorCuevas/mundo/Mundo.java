@@ -127,11 +127,7 @@ public class Mundo
 	public void mover( int i, int j) throws Exception
 	{
 
-		if (cantidadMaxMovimientos == 1)
-		{
-			cantidadMaxMovimientos--;
-			throw new Exception("Se terminaron los moviemtos");
-		}
+		
 		
 		if (tablero[i][j].darEstado()==(Casilla.OBSTACULO))
 		{
@@ -173,7 +169,10 @@ public class Mundo
 			throw new Exception("Haz ganado");
 		}
 
-
+		if (cantidadMaxMovimientos == 0)
+		{
+			throw new Exception("Se terminaron los moviemtos");
+		}
 
 	}
 
